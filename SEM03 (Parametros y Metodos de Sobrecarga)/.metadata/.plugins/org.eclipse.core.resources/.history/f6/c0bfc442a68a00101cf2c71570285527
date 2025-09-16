@@ -1,0 +1,32 @@
+package caso2;
+
+public class Coversor {
+private double celsius;
+private int km,seg;
+//sobrecarga de constructor
+public Coversor(double celsius) {
+	super();
+	this.celsius = celsius;
+}
+public Coversor(int km) {
+	super();
+	this.km = km;
+}
+public Coversor(int seg, boolean flag) { //no puede tener 2 constructores con el mismo tipo de parametros, entonces creamos un booleano
+	this.seg = seg;
+}
+public double Convertir(double celsius)
+{
+	return celsius*9/5+32;
+}
+public double Convertir(int km)
+{
+	return km*1.609;
+}
+public String Convertir(int seg, boolean x)
+{
+	int min = seg/60;
+	int segundos = seg%60;
+	return min+" minutos y "+segundos+" segundos.";
+}
+}

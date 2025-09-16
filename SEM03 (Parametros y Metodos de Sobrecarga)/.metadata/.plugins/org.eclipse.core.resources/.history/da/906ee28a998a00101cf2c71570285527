@@ -1,0 +1,123 @@
+package caso1;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class V1 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JTextField txtN1;
+	private JTextField txtN2;
+	private JLabel lblNewLabel_2;
+	private JTextField txtN3;
+	private JButton btnSum2ent;
+	private JButton btnSum3ent;
+	private JButton btnSum2Real;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					V1 frame = new V1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public V1() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 573, 434);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("Número 1: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(29, 32, 75, 28);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Número 2: ");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(29, 66, 75, 26);
+		contentPane.add(lblNewLabel_1);
+		
+		txtN1 = new JTextField();
+		txtN1.setBounds(114, 38, 86, 20);
+		contentPane.add(txtN1);
+		txtN1.setColumns(10);
+		
+		txtN2 = new JTextField();
+		txtN2.setBounds(114, 71, 86, 20);
+		contentPane.add(txtN2);
+		txtN2.setColumns(10);
+		
+		lblNewLabel_2 = new JLabel("Número 3: ");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(29, 97, 75, 26);
+		contentPane.add(lblNewLabel_2);
+		
+		txtN3 = new JTextField();
+		txtN3.setColumns(10);
+		txtN3.setBounds(114, 102, 86, 20);
+		contentPane.add(txtN3);
+		
+		btnSum2ent = new JButton("Sumar 2 enteros");
+		btnSum2ent.addActionListener(this);
+		btnSum2ent.setBounds(285, 28, 182, 28);
+		contentPane.add(btnSum2ent);
+		
+		btnSum3ent = new JButton("Sumar 3 enteros");
+		btnSum3ent.setBounds(285, 67, 182, 28);
+		contentPane.add(btnSum3ent);
+		
+		btnSum2Real = new JButton("Sumar 2 reales");
+		btnSum2Real.setBounds(285, 106, 182, 28);
+		contentPane.add(btnSum2Real);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(29, 160, 490, 206);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSum2ent) {
+			do_btnSum2ent_actionPerformed(e);
+		}
+	}
+	protected void do_btnSum2ent_actionPerformed(ActionEvent e) {
+		int n1=Integer.parseInt(txtN1.getText());
+		int n2=Integer.parseInt(txtN2.getText());
+		Calculadora c1=new Calculadora(n1, n2);
+		txtS.append("La suma de los dos enteros es: "+c1.Sumar(n1, n2));
+	}
+}

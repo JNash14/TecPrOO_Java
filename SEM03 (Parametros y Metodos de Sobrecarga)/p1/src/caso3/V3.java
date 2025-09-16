@@ -1,0 +1,117 @@
+package caso3;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class V3 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JTextField txtCod;
+	private JLabel lblNombre;
+	private JTextField txtNom;
+	private JLabel lblSueldo;
+	private JTextField txtSue;
+	private JButton btnProcesar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					V3 frame = new V3();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public V3() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 509, 373);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("Código:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(34, 26, 66, 17);
+		contentPane.add(lblNewLabel);
+		
+		txtCod = new JTextField();
+		txtCod.setBounds(123, 26, 86, 20);
+		contentPane.add(txtCod);
+		txtCod.setColumns(10);
+		
+		lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombre.setBounds(34, 54, 66, 17);
+		contentPane.add(lblNombre);
+		
+		txtNom = new JTextField();
+		txtNom.setColumns(10);
+		txtNom.setBounds(123, 54, 159, 20);
+		contentPane.add(txtNom);
+		
+		lblSueldo = new JLabel("Sueldo:");
+		lblSueldo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSueldo.setBounds(34, 85, 66, 17);
+		contentPane.add(lblSueldo);
+		
+		txtSue = new JTextField();
+		txtSue.setColumns(10);
+		txtSue.setBounds(123, 85, 71, 20);
+		contentPane.add(txtSue);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnProcesar.setBounds(344, 78, 86, 32);
+		contentPane.add(btnProcesar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(26, 130, 443, 163);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			do_btnProcesar_actionPerformed(e);
+		}
+	}
+	protected void do_btnProcesar_actionPerformed(ActionEvent e) {
+		int cod = Integer.parseInt(txtCod.getText());
+		String nom = txtNom.getText();
+		double sue = Double.parseDouble(txtSue.getText());
+		Contador c=new Contador(cod, nom, sue);
+		txtS.setText("");
+		txtS.append("Hay "+c.Cantidad()+" contadores");
+		txtS.append("\nLa suma de sueldos es: "+c.SumaSueldos());
+	}
+}

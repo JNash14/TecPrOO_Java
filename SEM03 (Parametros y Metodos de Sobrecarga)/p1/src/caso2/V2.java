@@ -1,0 +1,125 @@
+package caso2;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import caso1.Calculadora;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class V2 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JTextField txtNum;
+	private JButton btnNewButton;
+	private JButton btnKilmetrosAMillas;
+	private JButton btnSegundosAMinutos;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					V2 frame = new V2();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public V2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 498, 407);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("Digite número: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(44, 33, 102, 20);
+		contentPane.add(lblNewLabel);
+		
+		txtNum = new JTextField();
+		txtNum.setBounds(156, 34, 86, 21);
+		contentPane.add(txtNum);
+		txtNum.setColumns(10);
+		
+		btnNewButton = new JButton("Celsius a Fahrenheit");
+		btnNewButton.addActionListener(this);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton.setBounds(44, 76, 222, 29);
+		contentPane.add(btnNewButton);
+		
+		btnKilmetrosAMillas = new JButton("kilómetros a millas");
+		btnKilmetrosAMillas.addActionListener(this);
+		btnKilmetrosAMillas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnKilmetrosAMillas.setBounds(44, 118, 222, 29);
+		contentPane.add(btnKilmetrosAMillas);
+		
+		btnSegundosAMinutos = new JButton("Segundos a minutos y segundos");
+		btnSegundosAMinutos.addActionListener(this);
+		btnSegundosAMinutos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSegundosAMinutos.setBounds(44, 162, 222, 29);
+		contentPane.add(btnSegundosAMinutos);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(44, 214, 395, 129);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSegundosAMinutos) {
+			do_btnSegundosAMinutos_actionPerformed(e);
+		}
+		if (e.getSource() == btnKilmetrosAMillas) {
+			do_btnKilmetrosAMillas_actionPerformed(e);
+		}
+		if (e.getSource() == btnNewButton) {
+			do_btnNewButton_actionPerformed(e);
+		}
+	}
+	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
+		double num=Double.parseDouble(txtNum.getText());
+		Coversor co=new Coversor(num); 
+		txtS.setText("");
+		txtS.append("De Celsius a Fahrenheit:  "+co.Convertir(num));
+	}
+	protected void do_btnKilmetrosAMillas_actionPerformed(ActionEvent e) {
+		int num=Integer.parseInt(txtNum.getText());
+		Coversor co=new Coversor(num); 
+		txtS.setText("");
+		txtS.append("De Kilómetros a Millas:  "+co.Convertir(num));
+	}
+	protected void do_btnSegundosAMinutos_actionPerformed(ActionEvent e) {
+		int num=Integer.parseInt(txtNum.getText());
+		Coversor co=new Coversor(num, true); 
+		txtS.setText("");
+		txtS.append(co.Convertir(num, true));
+	}
+}
