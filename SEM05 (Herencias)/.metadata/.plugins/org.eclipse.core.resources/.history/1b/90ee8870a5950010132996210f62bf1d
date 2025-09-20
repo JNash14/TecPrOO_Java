@@ -1,0 +1,187 @@
+package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.SwingPropertyChangeSupport;
+
+import Padre.Círculo;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
+public class GuiCirculo extends JDialog implements ActionListener, ItemListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblNewLabel;
+	private JLabel lblArea;
+	private JTextField txtArea;
+	private JLabel lblLongitud;
+	private JTextField txtLongitud;
+	private JButton btnProcesar;
+	private JButton btnLimpiar;
+	private JButton btnSalir;
+	private JLabel lbColor;
+	private JTextField txtRadio;
+	private JLabel lblNewLabel_2;
+	private JComboBox cbColor;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GuiCirculo dialog = new GuiCirculo();
+			dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //DO_NOTHING_ON_CLOSE: sirve para que la X del form no obedezca
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public GuiCirculo() {
+		setTitle("Círculo");
+		setBounds(100, 100, 392, 342);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		lblNewLabel = new JLabel("Radio: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(34, 22, 46, 14);
+		contentPanel.add(lblNewLabel);
+		
+		txtRadio = new JTextField();
+		txtRadio.setBounds(99, 22, 86, 20);
+		contentPanel.add(txtRadio);
+		txtRadio.setColumns(10);
+		
+		lblArea = new JLabel("Area: ");
+		lblArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblArea.setBounds(34, 53, 46, 14);
+		contentPanel.add(lblArea);
+		
+		txtArea = new JTextField();
+		txtArea.setEditable(false);
+		txtArea.setColumns(10);
+		txtArea.setBounds(99, 53, 86, 20);
+		contentPanel.add(txtArea);
+		
+		lblLongitud = new JLabel("Longitud: ");
+		lblLongitud.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblLongitud.setBounds(34, 84, 59, 14);
+		contentPanel.add(lblLongitud);
+		
+		txtLongitud = new JTextField();
+		txtLongitud.setEditable(false);
+		txtLongitud.setColumns(10);
+		txtLongitud.setBounds(99, 84, 86, 20);
+		contentPanel.add(txtLongitud);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(34, 161, 89, 23);
+		contentPanel.add(btnProcesar);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(this);
+		btnLimpiar.setBounds(133, 161, 89, 23);
+		contentPanel.add(btnLimpiar);
+		
+		btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(this);
+		btnSalir.setBounds(238, 161, 89, 23);
+		contentPanel.add(btnSalir);
+		
+		lbColor = new JLabel("");
+		lbColor.setIcon(new ImageIcon("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen\\Circulo.png"));
+		lbColor.setBounds(252, 27, 61, 56);
+		contentPanel.add(lbColor);
+		
+		lblNewLabel_2 = new JLabel("Color:");
+		lblNewLabel_2.setBounds(34, 117, 46, 14);
+		contentPanel.add(lblNewLabel_2);
+		
+		cbColor = new JComboBox();
+		cbColor.addItemListener(this);
+		cbColor.addActionListener(this);
+		cbColor.setModel(new DefaultComboBoxModel(new String[] {"AMARILLO", "ROJO", "AZUL"}));
+		cbColor.setBounds(99, 115, 86, 22);
+		contentPanel.add(cbColor);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cbColor) {
+			do_cbColor_actionPerformed(e);
+		}
+		if (e.getSource() == btnSalir) {
+			do_btnSalir_actionPerformed(e);
+		}
+		if (e.getSource() == btnLimpiar) {
+			do_btnLimpiar_actionPerformed(e);
+		}
+		if (e.getSource() == btnProcesar) {
+			do_btnProcesar_actionPerformed(e);
+		}
+	}
+	protected void do_btnProcesar_actionPerformed(ActionEvent e) {
+		double radio = Double.parseDouble(txtRadio.getText());
+		Círculo ci = new Círculo(radio);
+		txtArea.setText(""+ci.AreaCirculo());
+		txtLongitud.setText(""+ci.LongitudCirculo());
+	}
+	protected void do_btnLimpiar_actionPerformed(ActionEvent e) {
+		txtArea.setText("");
+		txtRadio.setText("");
+		txtLongitud.setText("");
+	}
+	protected void do_btnSalir_actionPerformed(ActionEvent e) {
+		dispose(); //sirve para cerrar una ventana
+	}
+	protected void do_cbColor_actionPerformed(ActionEvent e) {
+		if (cbColor.getSelectedItem()=="AZUL")
+		{
+			lbColor.setIcon(new javax.swing.ImageIcon(getClass().getResource("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen")));
+		}
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cbColor) {
+			do_cbColor_itemStateChanged(e);
+		}
+	}
+	protected void do_cbColor_itemStateChanged(ItemEvent e) {
+		int posi=cbColor.getSelectedIndex();
+		switch (posi) {
+		case 0:
+			lbColor.setIcon(new ImageIcon("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen\\Circulo.png"));
+			break;
+		case 1:
+			lbColor.setIcon(new ImageIcon("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen\\Rojo.png"));
+			break;
+		case 2:
+			lbColor.setIcon(new ImageIcon("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen\\Azul.jpg"));
+			break;
+
+		default:
+			break;
+		}
+	}
+}

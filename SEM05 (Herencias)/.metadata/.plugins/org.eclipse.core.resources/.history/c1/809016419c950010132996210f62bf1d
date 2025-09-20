@@ -1,0 +1,116 @@
+package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class GuiCirculo extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JLabel lblNewLabel;
+	private JLabel lblArea;
+	private JTextField txtArea;
+	private JLabel lblLongitud;
+	private JTextField txtLongitud;
+	private JButton btnProcesar;
+	private JButton btnLimpiar;
+	private JButton btnSalir;
+	private JLabel lblNewLabel_1;
+	private JTextField txtRadio;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			GuiCirculo dialog = new GuiCirculo();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public GuiCirculo() {
+		setTitle("Círculo");
+		setBounds(100, 100, 450, 399);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		lblNewLabel = new JLabel("Radio: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(10, 24, 46, 14);
+		contentPanel.add(lblNewLabel);
+		
+		txtRadio = new JTextField();
+		txtRadio.setBounds(75, 24, 86, 20);
+		contentPanel.add(txtRadio);
+		txtRadio.setColumns(10);
+		
+		lblArea = new JLabel("Area: ");
+		lblArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblArea.setBounds(10, 55, 46, 14);
+		contentPanel.add(lblArea);
+		
+		txtArea = new JTextField();
+		txtArea.setEditable(false);
+		txtArea.setColumns(10);
+		txtArea.setBounds(75, 55, 86, 20);
+		contentPanel.add(txtArea);
+		
+		lblLongitud = new JLabel("Longitud: ");
+		lblLongitud.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblLongitud.setBounds(10, 86, 59, 14);
+		contentPanel.add(lblLongitud);
+		
+		txtLongitud = new JTextField();
+		txtLongitud.setEditable(false);
+		txtLongitud.setColumns(10);
+		txtLongitud.setBounds(75, 86, 86, 20);
+		contentPanel.add(txtLongitud);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(34, 142, 89, 23);
+		contentPanel.add(btnProcesar);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(133, 142, 89, 23);
+		contentPanel.add(btnLimpiar);
+		
+		btnSalir = new JButton("Salir");
+		btnSalir.setBounds(238, 142, 89, 23);
+		contentPanel.add(btnSalir);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\UPN\\Desktop\\SEMANA05 - NRC\\p1\\imagen\\Circulo.png"));
+		lblNewLabel_1.setBounds(252, 27, 61, 56);
+		contentPanel.add(lblNewLabel_1);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			do_btnProcesar_actionPerformed(e);
+		}
+	}
+	protected void do_btnProcesar_actionPerformed(ActionEvent e) {
+		double radio = Double.parseDouble(txt)
+	}
+}
